@@ -1,6 +1,7 @@
 defmodule Exbands do
-  def start do
-    IO.puts "Hello"
-  end
+  @limit 2
 
+  def start do
+    Exbands.Lastfm.get_bands("a", @limit)
+  end
 end
