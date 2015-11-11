@@ -24,3 +24,6 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :exbands, api_key: ""
+config :exbands, database: "onstage_development"
+config :exbands, username: "postgres"
+config :exbands, password: "postgres"

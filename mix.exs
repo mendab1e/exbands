@@ -5,6 +5,7 @@ defmodule Exbands.Mixfile do
     [app: :exbands,
      version: "0.0.1",
      elixir: "~> 1.0",
+     escript: escript_config,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -14,7 +15,7 @@ defmodule Exbands.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :httpoison]]
+    [applications: [:logger, :httpoison, :postgrex]]
   end
 
   # Dependencies can be Hex packages:
@@ -27,6 +28,14 @@ defmodule Exbands.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.8.0"}, {:poison, "~> 1.5"}]
+    [
+      {:httpoison, "~> 0.8.0"},
+      {:poison, "~> 1.5"},
+      {:postgrex, "~> 0.9.1"}
+    ]
+  end
+
+  defp escript_config do
+    [main_module: Exbands]
   end
 end
