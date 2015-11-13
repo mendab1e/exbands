@@ -18,7 +18,7 @@ defmodule Exbands.Lastfm do
     body
     |> Poison.decode!
     |> match_bands
-    |> Enum.map &(&1["name"])
+    |> Enum.reduce(HashDict.new, fn band, d -> Dict.put(d, band["name"], 1) end)
   end
 
   defp match_bands(%{"error" => @wrong_api_key_error, "message" => message}) do

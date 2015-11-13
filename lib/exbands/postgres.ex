@@ -2,7 +2,7 @@ defmodule Exbands.Postgres do
   @username Application.get_env(:exbands, :username)
   @password Application.get_env(:exbands, :password)
   @database Application.get_env(:exbands, :database)
-  @batch_size 1000
+  @batch_size 10000
 
   def connect do
     Postgrex.Connection.start_link(
@@ -27,7 +27,7 @@ defmodule Exbands.Postgres do
     bands_query = build_bands_query(bands)
     Postgrex.Connection.query!(pid, "INSERT INTO artists \
       (name, created_at, updated_at) VALUES #{bands_query}", [])
-    IO.puts "#{@batch_size} bands have been written"
+    IO.puts "#{Enum.count(bands)} bands have been written"
   end
 
   def load_bands(pid) do
